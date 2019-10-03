@@ -1,0 +1,72 @@
+---
+title: "Data Visualization"
+author: "Ruitao Lin"
+date: "10/3/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+install.packages("gglpot2")
+install.packages("tidyverse")
+install.packages("dplyr")
+library("tidyverse")
+library("ggplot2")
+library("tibble")
+library("dplyr")
+
+
+```
+
+## The Dataset
+
+The following dataset is about the fuel economy of some car models.
+```{r mpg}
+view(mpg)
+```
+
+
+
+## Some Plots for the Dataset
+```{r manufacture, echo=FALSE}
+ggplot(data = mpg) +
+  geom_histogram(mapping = aes(x = year), binwidth = 0.5)
+```
+
+The histogram above shows the distribution of the year that the car is made. The dataset only includes car models at 1999 and 2008
+
+
+
+```{r disp, echo=TRUE}
+ggplot(data = mpg) +
+  geom_histogram(mapping = aes(x = displ), binwidth = 0.1)
+```
+
+The plot above shows the distribution of engine displacement in liter. Most cars have displacement at 1.8 liters.
+
+```{r}
+mpg %>%
+  ggplot(mapping = aes(x = displ, y = cty)) + 
+    geom_point() + 
+    geom_smooth(method = lm) +
+    ggtitle("Fuel Economy and engine") + xlab("engine displacement") + ylab("fuel economy in city")
+```
+
+The graph above plots the relationship between engine displacement and fuel economy for each individual car. Now I will group the cars into manufacturer and replot the relationship.
+
+```{r}
+mpg %>%
+  group_by(manufacturer) %>%
+  summarise(mean_displ = mean(displ), mean_cty = mean(cty)) %>%
+  ggplot(mapping = aes(x = mean_displ, y = mean_cty)) + 
+    geom_point() + 
+    geom_smooth(method = lm) +
+    ggtitle("Fuel Economy and engine") + xlab("engine displacement") + ylab("fuel economy in city")
+```
+
+In general, the larger the engine displacement, the worse the car performs in city in terms of fuel economy.
+
+
+
+
+  
