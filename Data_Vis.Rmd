@@ -7,6 +7,7 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+knitr::kable
 #install.packages("gglpot2")
 #install.packages("tidyverse")
 #install.packages("dplyr")
@@ -14,7 +15,7 @@ library("tidyverse")
 library("ggplot2")
 library("tibble")
 library("dplyr")
-
+library("knitr")
 
 ```
 
@@ -25,8 +26,10 @@ The following dataset is about the fuel economy of some car models.
 view(mpg)
 ```
 
+```{r table visualization}
+kable(mpg, format = "latex")
 
-
+```
 ## Some Plots for the Dataset
 ```{r manufacture, echo=FALSE}
 ggplot(data = mpg) +
