@@ -1,0 +1,120 @@
+---
+title: "Simulation Exercise"
+author: "Ruitao Lin"
+date: "11/20/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 7.1
+
+```{r}
+baskestball.sim = function(n.miss){
+  n.shot = 0
+  success = rbinom(1,1,0.6)
+  if success = 
+}
+```
+
+
+## 7.3
+```{r}
+n.sim = 1000
+savings = rep(NA, 1000)
+
+for (s in 1:n.sim){
+  cost.save = rnorm(1, mean = 5, sd = 4)
+  market.size = rnorm(1, mean = 40000, sd = 10000)
+  savings[s] = cost.save * market.size
+}
+
+mean(savings)
+```
+
+
+On average the company can save 196113.6 dollars, which is close to what's predicted (200000).
+
+## 8.1
+# a
+```{r}
+x.1 = 1:100
+x.2 = rep(NA, 100)
+for (s in 1:100){
+  x.2[s] = rbinom(1, 1, 0.5)
+}
+
+y = 3 + 0.1*x.1 + 0.5*x.2 + rnorm(1,0,5)
+lm.1 = lm(y ~ x.1 + x.2)
+b1.hat = coef(lm.1[2])
+b1.se = se.coef(lm.1[2])
+b2.hat = coef(lm.1[3])
+b2.se = se.coef(lm.1[3])
+
+a =  c(b1.hat - b1.se, b1.hat = b1.se)
+a2 =  c(b1.hat - b1.se, b1.hat = b1.se)
+```
+
+
+# b
+```{r}
+x.1 = 1:100
+x.2 = rep(NA, 100)
+for (s in 1:100){
+  x.2[s] = rbinom(1, 1, 0.5)
+}
+
+n.fake = 1000
+cover1.68 = rep(NA, n.fake)
+cover2.68 = rep(NA, n.fake)
+for (s in 1:n.fake){
+  y = 3 + 0.1*x.1 + 0.5*x.2 + rnorm(1,0,5)
+  lm.1 = lm(y ~ x.1 + x.2)
+  b1 = 0.1
+  b2 = 0.5
+  b1.hat = coef(lm.1[2])
+  b1.se = se.coef(lm.1[2])
+  b2.hat = coef(lm.1[3])
+  b2.se = se.coef(lm.1[3])
+  cover1.68[s] = abs(b1 - b1.hat) < b1.se
+  cover2.68[s] = abs(b2 - b2.hat) < b2.se
+}
+
+cat (paste("68% coverage for b1: ", mean(cover1.68), "\n"))
+cat (paste("68% coverage for b2: ", mean(cover2.68), "\n"))
+```
+
+
+
+# c
+```{r}
+x.1 = 1:100
+x.2 = rep(NA, 100)
+for (s in 1:100){
+  x.2[s] = rbinom(1, 1, 0.5)
+}
+
+n.fake = 1000
+cover1.68 = rep(NA, n.fake)
+cover2.68 = rep(NA, n.fake)
+for (s in 1:n.fake){
+  y = 3 + 0.1*x.1 + 0.5*x.2 + r(1, df = 4)
+  lm.1 = lm(y ~ x.1 + x.2)
+  b1 = 0.1
+  b2 = 0.5
+  b1.hat = coef(lm.1[2])
+  b1.se = se.coef(lm.1[2])
+  b2.hat = coef(lm.1[3])
+  b2.se = se.coef(lm.1[3])
+  cover1.68[s] = abs(b1 - b1.hat) < b1.se
+  cover2.68[s] = abs(b2 - b2.hat) < b2.se
+}
+
+cat (paste("68% coverage for b1: ", mean(cover1.68), "\n"))
+cat (paste("68% coverage for b2: ", mean(cover2.68), "\n"))
+```
+
+
+
